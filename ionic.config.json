@@ -1,0 +1,7 @@
+{
+  "name": "COChavanod",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
