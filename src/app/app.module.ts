@@ -1,22 +1,21 @@
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
-import { AppComponent } from './app.component';
-import { TopicsComponent } from './Pages/topics/topics.component';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginPageModule } from './Pages/login/login.module';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
 
-import { ModalPostComponent } from './modal-post/modal-post.component';
-import { ModalUpdatePostComponent } from './modal-update-post/modal-update-post.component'
+import {ModalPostComponent} from './modal-post/modal-post.component';
+import {ModalUpdatePostComponent} from './modal-update-post/modal-update-post.component'
 
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {getAuth, provideAuth} from '@angular/fire/auth';
+import {environment} from 'src/environments/environment';
+import {getStorage, provideStorage} from '@angular/fire/storage';
+import {RouteReuseStrategy} from "@angular/router";
 
 @NgModule({
   declarations: [AppComponent, ModalPostComponent, ModalUpdatePostComponent],
@@ -30,8 +29,10 @@ import { environment } from 'src/environments/environment';
     )),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage())
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

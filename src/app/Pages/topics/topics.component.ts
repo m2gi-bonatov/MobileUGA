@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../models/topic';
-import { IonModal } from '@ionic/angular';
+import {AlertController, IonModal} from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -15,7 +17,10 @@ export class TopicsComponent implements OnInit {
   topics: Topic[] = [];
   name: string;
 
-  constructor(private topicService: TopicService) { }
+  constructor(private topicService: TopicService,
+              private auth: AuthenticationService,
+              private router: Router,
+              private alertController: AlertController) { }
 
   ngOnInit() {
     //this.topics = this.topicService.getAll();
@@ -46,4 +51,10 @@ export class TopicsComponent implements OnInit {
     }
     this.name = "";
   }
+
+  async disconnect() {
+    this.auth.logout();
+    this.router.navigateByUrl('/', {replaceUrl: true});
+  }
+
 }
